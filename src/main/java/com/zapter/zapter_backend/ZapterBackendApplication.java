@@ -14,7 +14,7 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 
 @SpringBootApplication
-public class ElectroshopBackendApplication implements WebMvcConfigurer {
+public class ZapterBackendApplication implements WebMvcConfigurer {
 
     @Bean
     public OpenAPI customOpenAPI() {
@@ -43,7 +43,7 @@ public class ElectroshopBackendApplication implements WebMvcConfigurer {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ElectroshopBackendApplication.class, args);
+        SpringApplication.run(ZapterBackendApplication.class, args);
     }
 
 }
