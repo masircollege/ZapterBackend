@@ -14,9 +14,9 @@ public interface VendorMapper {
     @Mapping(target = "createdAt", ignore = true)
     Vendor toVendor(VendorResponse newVendor);
 
-    @Mapping(target = "createdAt", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
     List<VendorResponse> toListOfVendorDto(List<Vendor> vendor);
 
-    @Mapping(target = "createdAt", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
     VendorResponse toListOfVendorDto(Vendor vendor);
 }

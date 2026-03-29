@@ -14,9 +14,9 @@ public interface BrandMapper {
     @Mapping(target = "createdAt", ignore = true)
     Brand toBrand(NewBrand newBrand);
 
-    @Mapping(target = "createdAt", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
     List<BrandResponse> toListOfBrandResponse(List<Brand> brand);
 
-    @Mapping(target = "createdAt", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
     BrandResponse toBrandResponse(Brand brand);
 }
