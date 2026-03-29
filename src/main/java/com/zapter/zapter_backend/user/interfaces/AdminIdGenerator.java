@@ -1,4 +1,4 @@
-//package com.electroshop.electroshop_backend.user.interfaces;
+//package com.zapter.zapter_backend.user.interfaces;
 //
 //import org.hibernate.engine.spi.SharedSessionContractImplementor;
 //import org.hibernate.generator.BeforeExecutionGenerator;

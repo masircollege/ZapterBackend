@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +28,12 @@ public class Brand{
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
-	
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "brand")
 	private List<Product> brandProduct = new ArrayList<>();
-	
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "brandModel")
 	private List<Model> model = new ArrayList<>();
 }

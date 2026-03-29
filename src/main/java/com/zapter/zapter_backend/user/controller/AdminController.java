@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/electroshop/admin")
+@RequestMapping("/zapter/admin")
 public class AdminController {
     final private AdminService adminService;
 

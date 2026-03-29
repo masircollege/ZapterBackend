@@ -1,6 +1,6 @@
-//package com.electroshop.electroshop_backend.user.domain;
+//package com.zapter.zapter_backend.user.domain;
 //
-//import com.electroshop.electroshop_backend.product.domain.Category;
+//import com.zapter.zapter_backend.product.domain.Category;
 //import jakarta.persistence.*;
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;

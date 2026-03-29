@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Category {
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "category") //TBR
 	private List<Product> categoryProduct = new ArrayList<>();
 

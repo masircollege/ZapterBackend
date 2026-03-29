@@ -1,4 +1,4 @@
-//package com.electroshop.electroshop_backend.user.controller;
+//package com.zapter.zapter_backend.user.controller;
 //
 //import org.springframework.web.bind.annotation.RestController;
 //

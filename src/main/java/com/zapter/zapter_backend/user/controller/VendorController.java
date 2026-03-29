@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/controller")
+@RequestMapping("/zapter/admin/vendor")
 public class VendorController {
 
     private final VendorService vendorService;
@@ -19,7 +19,7 @@ public class VendorController {
 
     @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','SYSTEM_ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> newVendor(VendorDto newVendor){
+    public ResponseEntity<?> newVendor(@RequestBody VendorDto newVendor){
         try {
             vendorService.createVendor(newVendor);
             return new ResponseEntity<>(HttpStatus.CREATED);

@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/inventory")
+@RequestMapping("/zapter/admin/inventory")
 public class InventoryController {
 
     private final InventoryService inventoryService;
@@ -19,7 +19,7 @@ public class InventoryController {
 
     @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','INVENTORY_ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> newInventory(NewInventory newInventory){
+    public ResponseEntity<?> newInventory(@RequestBody NewInventory newInventory){
         try {
             inventoryService.createInventory(newInventory);
             return new ResponseEntity<>(HttpStatus.CREATED);

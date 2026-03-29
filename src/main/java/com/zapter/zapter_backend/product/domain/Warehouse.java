@@ -25,10 +25,10 @@ public class Warehouse {
     private LocalDateTime createdAt;
 
     @Column(name = "warehouse_name")
-    private String warehouseName;
+    private String name;
 
     @Column(name = "warehouse_address")
-    private String warehouseAddress;
+    private String address;
 
     @OneToMany(mappedBy = "inventoryWarehouse")
     private List<Inventory> productInventory = new ArrayList<>();

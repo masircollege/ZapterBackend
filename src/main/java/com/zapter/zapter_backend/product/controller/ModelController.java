@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/model")
+@RequestMapping("/zapter/admin/model")
 public class ModelController {
 
     private final ModelService modelService;

@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/category")
+@RequestMapping("/zapter/admin/category")
 public class CategoryController {
 
     private final CategoryService categoryService;

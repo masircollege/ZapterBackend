@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zapter.zapter_backend.cart.domain.CartProduct;
 import com.zapter.zapter_backend.measurement.domain.ProductMeasurement;
 import com.zapter.zapter_backend.order.domain.OrderProduct;
@@ -51,14 +52,17 @@ public class Product{
 //	@Column(name = "approval_status", nullable = false, columnDefinition = "VARCHAR(20) default 'PENDING'")
 //	private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "brand_id", nullable = false)
 	private Brand brand;
 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "model_id",nullable = false)
 	private Model model;

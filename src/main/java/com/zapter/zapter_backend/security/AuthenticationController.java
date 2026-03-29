@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop")
+@RequestMapping("/zapter")
 public class AuthenticationController {
 	
 	private final AuthenticationService authService;

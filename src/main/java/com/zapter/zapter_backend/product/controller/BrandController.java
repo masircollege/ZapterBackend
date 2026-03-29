@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/brand")
+@RequestMapping("/zapter/admin/brand")
 public class BrandController {
 
     private final BrandService brandService;

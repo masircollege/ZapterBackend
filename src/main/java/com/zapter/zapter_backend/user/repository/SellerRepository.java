@@ -1,6 +1,6 @@
-//package com.electroshop.electroshop_backend.user.repository;
+//package com.zapter.zapter_backend.user.repository;
 //
-//import com.electroshop.electroshop_backend.user.domain.Seller;
+//import com.zapter.zapter_backend.user.domain.Seller;
 //import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.stereotype.Repository;
 //

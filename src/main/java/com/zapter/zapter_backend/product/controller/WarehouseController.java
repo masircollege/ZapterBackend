@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/admin/warehouse")
+@RequestMapping("/zapter/admin/warehouse")
 public class WarehouseController {
 
     private final WarehouseService warehouseService;
@@ -19,7 +19,7 @@ public class WarehouseController {
 
     @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> newWarehouse(NewWarehouse newWarehouse){
+    public ResponseEntity<?> newWarehouse(@RequestBody NewWarehouse newWarehouse){
         try {
             warehouseService.createWarehouse(newWarehouse);
             return new ResponseEntity<>(HttpStatus.CREATED);

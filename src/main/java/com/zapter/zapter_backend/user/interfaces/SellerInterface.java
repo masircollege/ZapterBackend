@@ -1,4 +1,4 @@
-//package com.electroshop.electroshop_backend.user.interfaces;
+//package com.zapter.zapter_backend.user.interfaces;
 //
 //public interface SellerInterface extends Accounts{
 //}

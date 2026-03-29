@@ -1,17 +1,18 @@
 package com.zapter.zapter_backend.product.dto.prod;
 
-import com.zapter.zapter_backend.product.domain.Brand;
-import com.zapter.zapter_backend.product.domain.Category;
-import com.zapter.zapter_backend.product.domain.Model;
+import com.zapter.zapter_backend.product.enums.StockStatus;
 
 import java.math.BigDecimal;
 
 public record ProductResponse(
-   String name,
-   Category category,
-   Brand brand,
-   Model model,
-   String color,
-   String description,
-   BigDecimal price
-) {}
+        Long productId,
+        String name,
+        Long category,
+        Long brand,
+        Long model,
+        String color,
+        String description,
+        BigDecimal price,
+        StockStatus stockStatus
+) {
+}
