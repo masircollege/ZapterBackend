@@ -24,8 +24,4 @@ public class PickupAddress {
     private String district;
 
     private String state;
-
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehousePickupAddress;
 }

@@ -13,6 +13,7 @@ import com.zapter.zapter_backend.user.domain.Vendor;
 import com.zapter.zapter_backend.user.repository.VendorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,14 +72,34 @@ public class InventoryService {
 
     public List<InventoryResponse> get(){
         try {
-            return inventoryMapper.toListOfInventoryResponse(inventoryRepository.findAll());
+            List<Inventory> inventories = inventoryRepository.findAll();
+            return inventories.stream()
+                    .map(inventory -> new InventoryResponse(
+                            inventory.getId(),
+                            inventory.getQuantity(),
+                            inventory.getMinimumCount(),
+                            inventory.getInventoryProduct().getId(),
+                            inventory.getInventoryWarehouse().getId(),
+                            inventory.getInventoryVendor().getId()
+                    ))
+                    .toList();
+//            return inventoryMapper.toListOfInventoryResponse(inventoryRepository.findAll());
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }
     }
     public InventoryResponse getById(Long id){
         try {
-            return inventoryMapper.toInventoryResponse(inventoryRepository.findById(id).orElseThrow(RuntimeException::new));
+            Inventory inventory = inventoryRepository.findById(id).orElseThrow();
+            return new InventoryResponse(
+                    inventory.getId(),
+                    inventory.getQuantity(),
+                    inventory.getMinimumCount(),
+                    inventory.getInventoryProduct().getId(),
+                    inventory.getInventoryWarehouse().getId(),
+                    inventory.getInventoryVendor().getId()
+            );
+//            return inventoryMapper.toInventoryResponse(inventoryRepository.findById(id).orElseThrow(RuntimeException::new));
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }

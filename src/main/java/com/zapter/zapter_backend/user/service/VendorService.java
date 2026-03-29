@@ -1,7 +1,7 @@
 package com.zapter.zapter_backend.user.service;
 
 import com.zapter.zapter_backend.user.domain.Vendor;
-import com.zapter.zapter_backend.user.dto.vendor.VendorDto;
+import com.zapter.zapter_backend.user.dto.vendor.VendorResponse;
 import com.zapter.zapter_backend.user.mapper.VendorMapper;
 import com.zapter.zapter_backend.user.repository.VendorRepository;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class VendorService {
         this.vendorMapper = vendorMapper;
     }
 
-    public void createVendor(VendorDto vendorDto){
+    public void createVendor(VendorResponse vendorResponse){
         try {
-            vendorRepository.save(vendorMapper.toVendor(vendorDto));
+            vendorRepository.save(vendorMapper.toVendor(vendorResponse));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -42,14 +42,14 @@ public class VendorService {
         }
     }
 
-    public List<VendorDto> get(){
+    public List<VendorResponse> get(){
         try {
             return vendorMapper.toListOfVendorDto(vendorRepository.findAll());
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }
     }
-    public VendorDto getById(Long id){
+    public VendorResponse getById(Long id){
         try {
             return vendorMapper.toListOfVendorDto(vendorRepository.findById(id).orElseThrow(RuntimeException::new));
         } catch (RuntimeException e){

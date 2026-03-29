@@ -1,7 +1,7 @@
 package com.zapter.zapter_backend.user.mapper;
 
 import com.zapter.zapter_backend.user.domain.Vendor;
-import com.zapter.zapter_backend.user.dto.vendor.VendorDto;
+import com.zapter.zapter_backend.user.dto.vendor.VendorResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,9 +12,11 @@ public interface VendorMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    Vendor toVendor(VendorDto newVendor);
+    Vendor toVendor(VendorResponse newVendor);
 
-    List<VendorDto> toListOfVendorDto(List<Vendor> vendor);
+    @Mapping(target = "createdAt", ignore = true)
+    List<VendorResponse> toListOfVendorDto(List<Vendor> vendor);
 
-    VendorDto toListOfVendorDto(Vendor vendor);
+    @Mapping(target = "createdAt", ignore = true)
+    VendorResponse toListOfVendorDto(Vendor vendor);
 }

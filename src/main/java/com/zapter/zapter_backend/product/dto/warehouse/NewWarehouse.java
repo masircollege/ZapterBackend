@@ -2,5 +2,6 @@ package com.zapter.zapter_backend.product.dto.warehouse;
 
 public record NewWarehouse(
         String name,
-        String address
+        String address,
+        Long vendorId
 ) {}

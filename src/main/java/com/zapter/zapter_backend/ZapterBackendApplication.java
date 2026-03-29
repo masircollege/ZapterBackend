@@ -30,9 +30,9 @@ public class ZapterBackendApplication implements WebMvcConfigurer {
                                 .bearerFormat("JWT")))
 
                 .info(new Info()
-                        .title("zapter API")
+                        .title("Zapter API")
                         .version("1.0")
-                        .description("API documentation for zapter App")
+                        .description("API documentation for Zapter App")
                         .contact(new Contact()
                                 .name("Shaikh Masir")
                                 .email("send2masir@gmail.com")))

@@ -10,11 +10,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    Model toModel(NewModel newModel);
+//    @Mapping(target = "id", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
+//    Model toModel(NewModel newModel);
 
-    List<ModelResponse> toListOfModelResponse(List<Model> model);
+//    List<ModelResponse> toListOfModelResponse(List<Model> model);
 
-    ModelResponse toModelResponse(Model model);
+//    ModelResponse toModelResponse(Model model);
 }

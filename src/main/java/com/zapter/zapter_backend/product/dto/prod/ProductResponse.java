@@ -5,7 +5,7 @@ import com.zapter.zapter_backend.product.enums.StockStatus;
 import java.math.BigDecimal;
 
 public record ProductResponse(
-        Long productId,
+        Long id,
         String name,
         Long category,
         Long brand,

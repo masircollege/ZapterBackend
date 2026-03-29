@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.controller;
 
+import com.zapter.zapter_backend.product.dto.model.ModelResponse;
 import com.zapter.zapter_backend.product.dto.model.NewModel;
 import com.zapter.zapter_backend.product.service.ModelService;
 import jakarta.validation.Valid;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/zapter/admin/model")
@@ -31,7 +34,7 @@ public class ModelController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getCategories(){
+    public ResponseEntity<List<ModelResponse>> getModels(){
         try {
             return new ResponseEntity<>(modelService.get(),HttpStatus.OK);
         } catch (RuntimeException e){

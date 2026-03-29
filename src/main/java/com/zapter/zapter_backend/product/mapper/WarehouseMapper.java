@@ -11,12 +11,12 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface WarehouseMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    Warehouse toWarehouse(NewWarehouse newWarehouse);
+//    @Mapping(target = "id", ignore = true)
+//    @Mapping(target = "createdAt", ignore = true)
+//    Warehouse toWarehouse(NewWarehouse newWarehouse);
 
-    List<WarehouseResponse> toListOfWarehouseResponse(List<Warehouse> warehouse);
+//    List<WarehouseResponse> toListOfWarehouseResponse(List<Warehouse> warehouse);
 
-    WarehouseResponse toWarehouseResponse(Warehouse warehouse);
+//    WarehouseResponse toWarehouseResponse(Warehouse warehouse);
 
 }

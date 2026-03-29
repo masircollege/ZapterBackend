@@ -1,10 +1,11 @@
 package com.zapter.zapter_backend.product.dto.inventory;
 
-import com.zapter.zapter_backend.product.enums.StockStatus;
-
 public record InventoryResponse(
-        Long inventoryId,
+        Long id,
         Integer quantity,
         Integer minimumCount,
-        StockStatus stockStatus
+        Long productId,
+        Long warehouseId,
+        Long vendorId
+//        StockStatus stockStatus,
 ) {}

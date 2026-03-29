@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -49,6 +51,7 @@ public class Unit {
 	@Column(name = "is_base_unit", nullable = false)
 	private Boolean isBaseUnit;
 
-
+	@OneToMany(mappedBy = "unit")
+	private List<ProductMeasurement> productMeasurements = new ArrayList<>();
 
 }

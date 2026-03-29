@@ -134,6 +134,7 @@ public class DummyDataGenerator implements CommandLineRunner {
         p.setCategory(category);
         p.setBrand(brand);
         p.setModel(model);
+        p.setStockStatus(StockStatus.AVAILABLE);
         return productRepository.save(p);
     }
 
@@ -164,8 +165,8 @@ public class DummyDataGenerator implements CommandLineRunner {
 
     private Warehouse createWarehouse(String name, String address) {
         Warehouse w = new Warehouse();
-        w.setWarehouseName(name);
-        w.setWarehouseAddress(address);
+        w.setName(name);
+        w.setAddress(address);
         return warehouseRepository.save(w);
     }
 
@@ -184,7 +185,7 @@ public class DummyDataGenerator implements CommandLineRunner {
         inv.setInventoryVendor(vendor);
         inv.setQuantity(quantity);
         inv.setMinimumCount(minCount);
-        inv.setStockStatus(StockStatus.AVAILABLE);
+//        inv.setStockStatus(StockStatus.AVAILABLE);
         inventoryRepository.save(inv);
     }
 
@@ -192,6 +193,11 @@ public class DummyDataGenerator implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        if (productRepository.count() > 0) {
+            System.out.println("⏭️ Data already seeded, skipping...");
+            return;
+        }
 
         // ── 1. CATEGORIES ─────────────────────────────────────────────────────
         Category laptops      = createCategory("Laptop");

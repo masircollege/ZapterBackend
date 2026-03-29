@@ -15,7 +15,7 @@ public interface InventoryMapper {
 //    @Mapping(target = "latestBatch", ignore = true)
 //    Inventory toInventory(NewInventory newInventory);
 
-    List<InventoryResponse> toListOfInventoryResponse(List<Inventory> inventory);
+//    List<InventoryResponse> toListOfInventoryResponse(List<Inventory> inventory);
 
-    InventoryResponse toInventoryResponse(Inventory inventory);
+//    InventoryResponse toInventoryResponse(Inventory inventory);
 }

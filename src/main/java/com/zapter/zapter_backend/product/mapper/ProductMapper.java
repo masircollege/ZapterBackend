@@ -17,8 +17,8 @@ public interface ProductMapper {
 //	@Mapping(target = "stockStatus", ignore = true)
 //	Product toProduct(ProductDto newProduct);
 
-	List<ProductResponse> toListOfProductResponse(List<Product> product);
+//	List<ProductResponse> toListOfProductResponse(List<Product> product);
 
-	ProductResponse toProductResponse(Product product);
+//	ProductResponse toProductResponse(Product product);
 
 }

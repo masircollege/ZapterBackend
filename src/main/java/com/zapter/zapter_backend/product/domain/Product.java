@@ -5,6 +5,7 @@ import com.zapter.zapter_backend.cart.domain.CartProduct;
 import com.zapter.zapter_backend.measurement.domain.ProductMeasurement;
 import com.zapter.zapter_backend.order.domain.OrderProduct;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.zapter.zapter_backend.product.enums.StockStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,6 +67,10 @@ public class Product{
 	@ManyToOne
 	@JoinColumn(name = "model_id",nullable = false)
 	private Model model;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "stock_status", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'AVAILABLE'")
+	private StockStatus stockStatus =  StockStatus.AVAILABLE;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "measurementProduct",fetch = FetchType.LAZY)

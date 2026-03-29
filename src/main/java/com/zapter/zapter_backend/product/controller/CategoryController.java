@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.controller;
 
+import com.zapter.zapter_backend.product.dto.category.CategoryResponse;
 import com.zapter.zapter_backend.product.dto.category.NewCategory;
 import com.zapter.zapter_backend.product.service.CategoryService;
 import jakarta.validation.Valid;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/zapter/admin/category")
@@ -30,7 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getCategoryDetail(){
+    public ResponseEntity<List<CategoryResponse>> getAllCategories(){
         try {
             return new ResponseEntity<>(categoryService.get(),HttpStatus.OK);
         } catch (RuntimeException e){

@@ -1,11 +1,13 @@
 package com.zapter.zapter_backend.user.controller;
 
-import com.zapter.zapter_backend.user.dto.vendor.VendorDto;
+import com.zapter.zapter_backend.user.dto.vendor.VendorResponse;
 import com.zapter.zapter_backend.user.service.VendorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/zapter/admin/vendor")
@@ -19,7 +21,7 @@ public class VendorController {
 
     @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','SYSTEM_ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> newVendor(@RequestBody VendorDto newVendor){
+    public ResponseEntity<?> newVendor(@RequestBody VendorResponse newVendor){
         try {
             vendorService.createVendor(newVendor);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -29,7 +31,7 @@ public class VendorController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getVendorDetail(){
+    public ResponseEntity<List<VendorResponse>> getVendorDetails(){
         try {
             return new ResponseEntity<>(vendorService.get(),HttpStatus.OK);
         } catch (RuntimeException e){
@@ -38,7 +40,7 @@ public class VendorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getVendorById(@PathVariable Long id){
+    public ResponseEntity<VendorResponse> getVendorById(@PathVariable Long id){
         try {
             return new ResponseEntity<>(vendorService.getById(id),HttpStatus.OK);
         } catch (RuntimeException e){

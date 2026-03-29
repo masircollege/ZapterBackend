@@ -36,9 +36,9 @@ public class Inventory {
 	@Column(name = "min_count",nullable = false)
 	private Integer minimumCount;
 
-	@Column(nullable = false, columnDefinition = "varchar(255) default 'AVAILABLE'")
-	@Enumerated(EnumType.STRING)
-	private StockStatus stockStatus;
+//	@Column(nullable = false, columnDefinition = "varchar(255) default 'AVAILABLE'")
+//	@Enumerated(EnumType.STRING)
+//	private StockStatus stockStatus;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id", nullable = false)

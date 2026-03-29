@@ -13,6 +13,7 @@ import com.zapter.zapter_backend.product.repository.ModelRepository;
 import com.zapter.zapter_backend.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,8 +41,21 @@ public class ProductService {
 
     public List<ProductResponse> getProducts(){
         try{
-
-            return productMapper.toListOfProductResponse(productRepository.findAll());
+            List<Product> products = productRepository.findAll();
+            return products.stream()
+                    .map(product -> new ProductResponse(
+                            product.getId(),
+                            product.getName(),
+                            product.getCategory().getId(),
+                            product.getBrand().getId(),
+                            product.getModel().getId(),
+                            product.getColor(),
+                            product.getDescription(),
+                            product.getPrice(),
+                            product.getStockStatus()
+                    ))
+                    .toList();
+//            return productMapper.toListOfProductResponse(productRepository.findAll());
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
@@ -61,6 +75,25 @@ public class ProductService {
             product.setDescription(newProduct.description());
             product.setPrice(newProduct.price());
             productRepository.save(product);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ProductResponse getProductById(Long id){
+        try{
+            Product product = productRepository.findById(id).orElseThrow();
+            return new ProductResponse(
+                    product.getId(),
+                    product.getName(),
+                    product.getCategory().getId(),
+                    product.getBrand().getId(),
+                    product.getModel().getId(),
+                    product.getColor(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getStockStatus()
+            );
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

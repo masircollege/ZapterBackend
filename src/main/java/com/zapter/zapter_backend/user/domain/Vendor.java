@@ -1,6 +1,7 @@
 package com.zapter.zapter_backend.user.domain;
 
 import com.zapter.zapter_backend.product.domain.Inventory;
+import com.zapter.zapter_backend.product.domain.Warehouse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,9 @@ public class Vendor {
 
     @Column(name = "vendor_address")
     private String address;
+
+    @OneToMany(mappedBy = "vendor")
+    private List<Warehouse> warehouses = new ArrayList<>();
 
     @OneToMany(mappedBy = "inventoryVendor")
     private List<Inventory> vendorProducts = new ArrayList<>();

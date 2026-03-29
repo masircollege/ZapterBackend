@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -41,4 +43,6 @@ public class MeasurementType {
 	@Column(nullable = false)
 	private String description;
 
+	@OneToMany(mappedBy = "measurementType")
+	private List<ProductMeasurement> productMeasurements = new ArrayList<>();
 }

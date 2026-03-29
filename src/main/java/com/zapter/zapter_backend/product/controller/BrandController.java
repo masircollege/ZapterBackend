@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.product.controller;
 
+import com.zapter.zapter_backend.product.dto.brand.BrandResponse;
 import com.zapter.zapter_backend.product.dto.brand.NewBrand;
 import com.zapter.zapter_backend.product.service.BrandService;
 import jakarta.validation.Valid;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/zapter/admin/brand")
@@ -31,7 +34,7 @@ public class BrandController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getBrandDetails(){
+    public ResponseEntity<List<BrandResponse>> getBrandDetails(){
         try {
             return new ResponseEntity<>(brandService.get(),HttpStatus.OK);
         } catch (RuntimeException e){
@@ -40,7 +43,7 @@ public class BrandController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getBrandById(@PathVariable Long id){
+    public ResponseEntity<BrandResponse> getBrandById(@PathVariable Long id){
         try {
             return new ResponseEntity<>(brandService.getById(id),HttpStatus.OK);
         } catch (RuntimeException e){

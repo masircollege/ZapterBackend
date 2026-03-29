@@ -1,6 +1,7 @@
 package com.zapter.zapter_backend.product.domain;
 
 import com.zapter.zapter_backend.user.domain.PickupAddress;
+import com.zapter.zapter_backend.user.domain.Vendor;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +31,10 @@ public class Warehouse {
     @Column(name = "warehouse_address")
     private String address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Vendor vendor;
+
     @OneToMany(mappedBy = "inventoryWarehouse")
     private List<Inventory> productInventory = new ArrayList<>();
-
-    @OneToMany(mappedBy = "warehousePickupAddress")
-    private List<PickupAddress> pickupAddresses = new ArrayList<>();
 
 }
