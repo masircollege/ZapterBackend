@@ -12,7 +12,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cart_product")
+@Table(
+		name = "cart_product",
+		uniqueConstraints = {
+				@UniqueConstraint(columnNames = {"cart_id","product_id"})
+		}
+)
 public class CartProduct {
 
 	@Id

@@ -1,19 +1,15 @@
 package com.zapter.zapter_backend.product.service;
 
-import com.zapter.zapter_backend.product.domain.Brand;
-import com.zapter.zapter_backend.product.domain.Category;
-import com.zapter.zapter_backend.product.domain.Model;
-import com.zapter.zapter_backend.product.domain.Product;
+import com.zapter.zapter_backend.product.domain.*;
+import com.zapter.zapter_backend.product.dto.KeyFeaturesDTO;
 import com.zapter.zapter_backend.product.dto.prod.ProductAdd;
 import com.zapter.zapter_backend.product.dto.prod.ProductResponse;
 import com.zapter.zapter_backend.product.mapper.ProductMapper;
-import com.zapter.zapter_backend.product.repository.BrandRepository;
-import com.zapter.zapter_backend.product.repository.CategoryRepository;
-import com.zapter.zapter_backend.product.repository.ModelRepository;
-import com.zapter.zapter_backend.product.repository.ProductRepository;
+import com.zapter.zapter_backend.product.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -24,19 +20,22 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
+    private final ProductKeyFeatureRepository productKeyFeatureRepository;
 
     public ProductService(
             ProductRepository productRepository,
             ProductMapper productMapper,
             CategoryRepository categoryRepository,
             BrandRepository brandRepository,
-            ModelRepository modelRepository
+            ModelRepository modelRepository,
+            ProductKeyFeatureRepository productKeyFeatureRepository
     ){
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.categoryRepository = categoryRepository;
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
+        this.productKeyFeatureRepository = productKeyFeatureRepository;
     }
 
     public List<ProductResponse> getProducts(){
@@ -50,6 +49,7 @@ public class ProductService {
                             product.getBrand().getId(),
                             product.getModel().getId(),
                             product.getColor(),
+                            productKeyFeatureRepository.getKeyFeaturesByProductId(product.getId()),
                             product.getDescription(),
                             product.getPrice(),
                             product.getStockStatus()
@@ -82,6 +82,7 @@ public class ProductService {
 
     public ProductResponse getProductById(Long id){
         try{
+            List<KeyFeaturesDTO> productKeyFeatures = productKeyFeatureRepository.getKeyFeaturesByProductId(id);
             Product product = productRepository.findById(id).orElseThrow();
             return new ProductResponse(
                     product.getId(),
@@ -90,6 +91,7 @@ public class ProductService {
                     product.getBrand().getId(),
                     product.getModel().getId(),
                     product.getColor(),
+                    productKeyFeatures,
                     product.getDescription(),
                     product.getPrice(),
                     product.getStockStatus()

@@ -56,6 +56,7 @@ public class SecurityConfig {
                                 .requestMatchers("/zapter/emp-admin-login").permitAll()
                                 .requestMatchers("/zapter/admin/set-password").permitAll()
                                 .requestMatchers("/zapter/admin/**").hasAnyAuthority("SUPER_ADMIN","SYSTEM_ADMIN")
+                                .requestMatchers("/zapter/cart").hasAuthority("USER")
 //                                .requestMatchers("/zapter/seller/**").hasRole("SELLER")
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "KeyFeatures")
+@Table(name = "key_features")
 public class KeyFeatures {
 
     @Id

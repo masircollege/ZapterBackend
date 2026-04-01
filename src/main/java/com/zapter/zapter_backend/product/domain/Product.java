@@ -15,10 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -77,13 +74,13 @@ public class Product{
 	private List<ProductMeasurement> productMeasurement = new ArrayList<>();
 
 	@OneToMany(mappedBy = "prodFeature")
-	private Set<ProductKeyFeature> productKeyFeatures = new HashSet<>();
+	private List<ProductKeyFeature> productKeyFeatures = new ArrayList<>();
 
 	@OneToMany(mappedBy = "cartProduct")
-	private Set<CartProduct> cartProducts = new HashSet<>();
+	private List<CartProduct> cartProducts = new ArrayList<>();
 
 	@OneToMany(mappedBy = "orderProduct")
-	private Set<OrderProduct> orders = new HashSet<>();
+	private List<OrderProduct> orders = new ArrayList<>();
 
 	@OneToMany(mappedBy = "reviewProduct")
 	private List<Review> prodReview = new ArrayList<>() ;

@@ -10,7 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "order_product")
+@Table(
+		name = "order_product",
+		uniqueConstraints = {
+				@UniqueConstraint(columnNames = {"product_id","order_id"})
+		}
+)
 public class OrderProduct {
 
 	@Id
@@ -22,7 +27,7 @@ public class OrderProduct {
 	private Product orderProduct;
 	
 	@ManyToOne
-	@JoinColumn(name = "orders")
+	@JoinColumn(name = "order_id")
 	private Order orders;
 	
 }

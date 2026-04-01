@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "carts")
+@Table(name = "cart")
 public class Cart{
 
 	@Id
