@@ -1,13 +1,12 @@
-package com.zapter.zapter_backend.order.service;
+package com.zapter.zapter_backend.orders.service;
 
 import com.zapter.zapter_backend.cart.dto.CartResponse;
-import com.zapter.zapter_backend.order.dto.OrderOverview;
-import com.zapter.zapter_backend.order.dto.OrderProductDto;
-import com.zapter.zapter_backend.order.repository.OrderRepository;
+import com.zapter.zapter_backend.orders.dto.OrderOverview;
+import com.zapter.zapter_backend.orders.dto.OrderProductDto;
+import com.zapter.zapter_backend.orders.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,11 +20,9 @@ public class OrderService {
 
     public OrderOverview getOverview(CartResponse cartResponse) {
         try {
-            LocalDateTime dispatchDate = LocalDateTime.now();
-            LocalDateTime deliveryDate = LocalDateTime.now();
-            dispatchDate = dispatchDate.plusDays(1);
-            deliveryDate = deliveryDate.plusDays(4);
-
+            final LocalDateTime dispatchDate = LocalDateTime.now().plusDays(1);
+            final LocalDateTime deliveryDate = LocalDateTime.now().plusDays(4);
+            
             return new OrderOverview(
                     cartResponse.userId(),
                     cartResponse.id(),
@@ -39,8 +36,8 @@ public class OrderService {
                                     )
                             ).collect(Collectors.toSet()),
                     cartResponse.totalPrice(),
-                    deliveryDate,
-                    dispatchDate
+                    dispatchDate,
+                    deliveryDate
             );
         } catch (Exception e) {
             throw new RuntimeException(e);

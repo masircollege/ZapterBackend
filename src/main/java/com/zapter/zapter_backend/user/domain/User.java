@@ -1,6 +1,6 @@
 package com.zapter.zapter_backend.user.domain;
 
-import com.zapter.zapter_backend.order.domain.Order;
+import com.zapter.zapter_backend.orders.domain.Order;
 import com.zapter.zapter_backend.product.domain.Review;
 import com.zapter.zapter_backend.user.enums.Role;
 import jakarta.persistence.*;

@@ -1,7 +1,7 @@
-package com.zapter.zapter_backend.order.domain;
+package com.zapter.zapter_backend.orders.domain;
 
 import com.zapter.zapter_backend.user.domain.User;
-import com.zapter.zapter_backend.order.enums.Status;
+import com.zapter.zapter_backend.orders.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 //@RequiredArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 	
 	@Id

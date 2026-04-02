@@ -1,17 +1,15 @@
-package com.zapter.zapter_backend.order.controller;
+package com.zapter.zapter_backend.orders.controller;
 
 import com.zapter.zapter_backend.cart.dto.CartResponse;
-import com.zapter.zapter_backend.order.domain.Order;
-import com.zapter.zapter_backend.order.dto.NewOrderDto;
-import com.zapter.zapter_backend.order.dto.OrderOverview;
-import com.zapter.zapter_backend.order.dto.OrderProductDto;
-import com.zapter.zapter_backend.order.service.OrderService;
+import com.zapter.zapter_backend.orders.dto.NewOrderDto;
+import com.zapter.zapter_backend.orders.dto.OrderOverview;
+import com.zapter.zapter_backend.orders.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/zapter/order")
+@RequestMapping("/zapter/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -31,7 +29,7 @@ public class OrderController {
         }
     }
 
-    public ResponseEntity<?> createOrder(@RequestBody NewOrderDto order) {
+    public ResponseEntity<?> createOrder(@RequestBody NewOrderDto orders) {
         try {
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         } catch (Exception e) {

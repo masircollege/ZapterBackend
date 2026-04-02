@@ -1,4 +1,4 @@
-package com.zapter.zapter_backend.order.enums;
+package com.zapter.zapter_backend.orders.enums;
 
 public enum Status {
 	PENDING,

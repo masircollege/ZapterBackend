@@ -1,7 +1,7 @@
-package com.zapter.zapter_backend.order.dto;
+package com.zapter.zapter_backend.orders.dto;
 
 import com.zapter.zapter_backend.product.domain.Product;
-import com.zapter.zapter_backend.order.enums.Status;
+import com.zapter.zapter_backend.orders.enums.Status;
 
 import java.math.BigDecimal;
 import java.util.Set;

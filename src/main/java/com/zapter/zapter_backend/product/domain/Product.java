@@ -3,7 +3,7 @@ package com.zapter.zapter_backend.product.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zapter.zapter_backend.cart.domain.CartProduct;
 import com.zapter.zapter_backend.measurement.domain.ProductMeasurement;
-import com.zapter.zapter_backend.order.domain.OrderProduct;
+import com.zapter.zapter_backend.orders.domain.OrderProduct;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.zapter.zapter_backend.product.enums.StockStatus;
 import jakarta.persistence.*;

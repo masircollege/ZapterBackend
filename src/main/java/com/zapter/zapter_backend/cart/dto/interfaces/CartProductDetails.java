@@ -1,4 +1,4 @@
-package com.zapter.zapter_backend.cart.dto;
+package com.zapter.zapter_backend.cart.dto.interfaces;
 
 import java.math.BigDecimal;
 

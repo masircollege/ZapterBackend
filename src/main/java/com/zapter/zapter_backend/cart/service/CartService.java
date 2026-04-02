@@ -3,6 +3,8 @@ package com.zapter.zapter_backend.cart.service;
 import com.zapter.zapter_backend.cart.domain.Cart;
 import com.zapter.zapter_backend.cart.domain.CartProduct;
 import com.zapter.zapter_backend.cart.dto.*;
+import com.zapter.zapter_backend.cart.dto.interfaces.CartByUserDto;
+import com.zapter.zapter_backend.cart.dto.interfaces.CartProductDetails;
 import com.zapter.zapter_backend.cart.repository.CartProductRepository;
 import com.zapter.zapter_backend.cart.repository.CartRepository;
 import com.zapter.zapter_backend.product.repository.ProductRepository;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -54,8 +57,8 @@ public class CartService {
                     cartProductRepository.save(cartProduct);
                 } else {
                     Cart cart = cartRepository.findById(cartRepository.findCartByUserId(userId)).get();
-                    if (cartProductRepository.existsByProductId(productId)) {
-                        cartProductRepository.updateQuantity(productId);
+                    if (cartProductRepository.existsByProductIdAndCartId(productId, cart.getId())) {
+                        cartProductRepository.updateQuantity(productId,cart.getId());
                     } else {
                         CartProduct cartProduct = new CartProduct();
                         cartProduct.setCarts(cart);
@@ -75,7 +78,16 @@ public class CartService {
     public CartResponse getCartByUserId(Long userId) {
         try {
             CartByUserDto cart = cartRepository.findCartDtoDetailsByUserId(userId);
-            Set<CartProductDetails> cartProducts = cartProductRepository.findCartProductByCartId(cart.getCartId());
+            Set<CartProductDetails> rawProducts = cartProductRepository.findCartProductByCartId(cart.getCartId());
+            Set<CartProductDetailsDto> cartProducts = rawProducts.stream()
+                    .map(product -> new CartProductDetailsDto(
+                            product.getProductId(),
+                            product.getProductName(),
+                            product.getColor(),
+                            product.getPrice(),
+                            product.getQuantity(),
+                            product.getStockStatus()
+                    )).collect(Collectors.toSet());
             List<BigDecimal> priceList = new ArrayList<>();
             BigDecimal totalPrice = new BigDecimal(0);
             cartProducts.forEach(cp -> {

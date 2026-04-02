@@ -1,7 +1,7 @@
 package com.zapter.zapter_backend.cart.repository;
 
 import com.zapter.zapter_backend.cart.domain.CartProduct;
-import com.zapter.zapter_backend.cart.dto.CartProductDetails;
+import com.zapter.zapter_backend.cart.dto.interfaces.CartProductDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,11 +22,11 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long>{
     )
     Set<CartProductDetails> findCartProductByCartId(@Param("cart_id") Long cartId);
 
-    @Query(value = "SELECT EXISTS (SELECT 1 FROM cart_product WHERE product_id = :product_id)", nativeQuery = true)
-    boolean existsByProductId(@Param("product_id") Long productId);
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM cart_product WHERE product_id = :product_id AND cart_id = :cart_id)", nativeQuery = true)
+    boolean existsByProductIdAndCartId(@Param("product_id") Long productId, @Param("cart_id") Long cartId);
 
     @Modifying
-    @Query(value = "UPDATE cart_product SET quantity = quantity + 1 WHERE product_id = :product_id", nativeQuery = true)
-    void updateQuantity(@Param("product_id") Long productId);
+    @Query(value = "UPDATE cart_product SET quantity = quantity + 1 WHERE product_id = :product_id AND cart_id = :cart_id", nativeQuery = true)
+    void updateQuantity(@Param("product_id") Long productId, @Param("cart_id") Long cartId);
 
 }

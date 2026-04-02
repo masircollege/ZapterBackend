@@ -1,4 +1,4 @@
-package com.zapter.zapter_backend.order.domain;
+package com.zapter.zapter_backend.orders.domain;
 
 import com.zapter.zapter_backend.product.domain.Product;
 import jakarta.persistence.*;

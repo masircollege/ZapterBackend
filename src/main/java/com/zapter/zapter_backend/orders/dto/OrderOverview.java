@@ -1,4 +1,4 @@
-package com.zapter.zapter_backend.order.dto;
+package com.zapter.zapter_backend.orders.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
