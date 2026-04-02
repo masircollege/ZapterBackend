@@ -8,18 +8,12 @@ import com.zapter.zapter_backend.measurement.repository.MeasurementTypeRepositor
 import com.zapter.zapter_backend.measurement.repository.ProductMeasurementRepository;
 import com.zapter.zapter_backend.measurement.repository.UnitRepository;
 import com.zapter.zapter_backend.product.domain.*;
-import com.zapter.zapter_backend.product.domain.*;
 import com.zapter.zapter_backend.product.enums.StockStatus;
 import com.zapter.zapter_backend.product.repository.*;
-import com.zapter.zapter_backend.product.repository.*;
-import com.zapter.zapter_backend.user.domain.User;
 import com.zapter.zapter_backend.user.domain.Vendor;
-import com.zapter.zapter_backend.user.enums.Role;
 import com.zapter.zapter_backend.user.repository.UserRepository;
 import com.zapter.zapter_backend.user.repository.VendorRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -43,7 +37,6 @@ public class DummyDataGenerator implements CommandLineRunner {
     private final WarehouseRepository warehouseRepository;
     private final VendorRepository vendorRepository;
     private final InventoryRepository inventoryRepository;
-    private final UserRepository userRepository;
 
     public DummyDataGenerator(
             CategoryRepository categoryRepository,
@@ -75,7 +68,6 @@ public class DummyDataGenerator implements CommandLineRunner {
         this.vendorRepository = vendorRepository;
         this.inventoryRepository = inventoryRepository;
         this.productMeasurementRepository = productMeasurementRepository;
-        this.userRepository = userRepository;
     }
 
     // ── Helper methods ────────────────────────────────────────────────────────
@@ -192,7 +184,6 @@ public class DummyDataGenerator implements CommandLineRunner {
         inv.setInventoryVendor(vendor);
         inv.setQuantity(quantity);
         inv.setMinimumCount(minCount);
-//        inv.setStockStatus(StockStatus.AVAILABLE);
         inventoryRepository.save(inv);
     }
 
@@ -205,20 +196,6 @@ public class DummyDataGenerator implements CommandLineRunner {
             System.out.println("⏭️ Data already seeded, skipping...");
             return;
         }
-
-        // USER
-
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String pasw = passwordEncoder.encode("Qwer@123");
-
-//        User user = new User();
-//        user.setPhoneNumber("9876543218");
-//        user.setPassword(pasw);
-//        user.setFirstName("FirstName");
-//        user.setLastName("LastName");
-//        user.setCountryCode("string");
-//        user.setRole(Role.USER);
-//        userRepository.save(user);
 
         // ── 1. CATEGORIES ─────────────────────────────────────────────────────
         Category laptops      = createCategory("Laptop");

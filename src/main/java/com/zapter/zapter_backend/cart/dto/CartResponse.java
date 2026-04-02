@@ -6,6 +6,6 @@ import java.util.Set;
 public record CartResponse(
 		Long id,
 		Long userId,
-		Set<CartProductDto> products,
+		Set<CartProductDetails> products,
 		BigDecimal totalPrice
 		) {}

@@ -29,7 +29,7 @@ public class ProductService {
             BrandRepository brandRepository,
             ModelRepository modelRepository,
             ProductKeyFeatureRepository productKeyFeatureRepository
-    ){
+    ) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.categoryRepository = categoryRepository;
@@ -38,8 +38,8 @@ public class ProductService {
         this.productKeyFeatureRepository = productKeyFeatureRepository;
     }
 
-    public List<ProductResponse> getProducts(){
-        try{
+    public List<ProductResponse> getProducts() {
+        try {
             List<Product> products = productRepository.findAll();
             return products.stream()
                     .map(product -> new ProductResponse(
@@ -61,7 +61,7 @@ public class ProductService {
         }
     }
 
-    public void createProd(ProductAdd newProduct){
+    public void createProd(ProductAdd newProduct) {
         try {
             Category category = categoryRepository.findById(newProduct.categoryId()).orElseThrow();
             Brand brand = brandRepository.findById(newProduct.brandId()).orElseThrow();
@@ -80,8 +80,8 @@ public class ProductService {
         }
     }
 
-    public ProductResponse getProductById(Long id){
-        try{
+    public ProductResponse getProductById(Long id) {
+        try {
             List<KeyFeaturesDTO> productKeyFeatures = productKeyFeatureRepository.getKeyFeaturesByProductId(id);
             Product product = productRepository.findById(id).orElseThrow();
             return new ProductResponse(

@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 //@RequiredArgsConstructor
-@Table(name = "orders")
+@Table(name = "order")
 public class Order {
 	
 	@Id
@@ -27,25 +27,25 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User orderUser;
-	
-	@OneToMany(mappedBy = "orders")
-	private Set<OrderProduct> orderProduct = new HashSet<>();
-	
+
 	@Column(columnDefinition = "varchar(255) default 'PENDING'", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	
+
 	@Column(nullable = false)
 	private BigDecimal amount;
-	
+
 	@Column(nullable = false)
 	private String address;
-	
+
 	@Column(nullable = false)
 	private LocalDateTime dispatchDate;
-	
+
 	@Column(nullable = false)
 	private LocalDateTime deliveryDate;
-	
+
+	@OneToMany(mappedBy = "orders")
+	private Set<OrderProduct> orderProduct = new HashSet<>();
+
 }
  
