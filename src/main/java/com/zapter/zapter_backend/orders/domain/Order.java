@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.orders.domain;
 
+import com.zapter.zapter_backend.payment.domain.Payment;
 import com.zapter.zapter_backend.user.domain.User;
 import com.zapter.zapter_backend.orders.enums.Status;
 import jakarta.persistence.*;
@@ -16,7 +17,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "orders")
 public class Order {
 	
@@ -43,6 +43,9 @@ public class Order {
 
 	@Column(nullable = false)
 	private LocalDateTime deliveryDate;
+
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
 
 	@OneToMany(mappedBy = "orders")
 	private Set<OrderProduct> orderProduct = new HashSet<>();

@@ -25,6 +25,9 @@ public class OrderProduct {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product orderProduct;
+
+	@Column(nullable = false)
+	private Integer quantity;
 	
 	@ManyToOne
 	@JoinColumn(name = "order_id")

@@ -26,7 +26,8 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long>{
     boolean existsByProductIdAndCartId(@Param("product_id") Long productId, @Param("cart_id") Long cartId);
 
     @Modifying
-    @Query(value = "UPDATE cart_product SET quantity = quantity + 1 WHERE product_id = :product_id AND cart_id = :cart_id", nativeQuery = true)
-    void updateQuantity(@Param("product_id") Long productId, @Param("cart_id") Long cartId);
+    @Query(value = "UPDATE cart_product SET quantity = quantity + :quantity WHERE product_id = :product_id AND cart_id = :cart_id", nativeQuery = true)
+    void updateQuantity(@Param("product_id") Long productId, @Param("cart_id") Long cartId, @Param("quantity") Integer quantity);
 
+    CartProduct findByCartProductIdAndCartsId(Long cartProductId, Long cartsId);
 }
