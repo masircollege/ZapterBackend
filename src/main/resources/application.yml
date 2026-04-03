@@ -18,8 +18,7 @@ spring:
       name: user
       password: pass
       roles: USER
-
 razorpay:
     key-id: rzp_test_SYcy5fobkxRpqE
     key-secret: TlonLy6dF6qIIB5LgLF2sLS3
-#    webhook-secret: XXXXXXXXXXXXXXXXXXXXXXXX
+#
