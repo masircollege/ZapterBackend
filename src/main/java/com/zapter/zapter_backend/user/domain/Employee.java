@@ -25,4 +25,7 @@ public class Employee {
     @Column(name = "role", nullable = false)
     private EmployeeRole role = EmployeeRole.SYSTEM_ADMIN;
 
+    @Column(name = "phone_no", length = 15)
+    private String phoneNumber;
+
 }

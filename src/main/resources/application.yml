@@ -18,6 +18,17 @@ spring:
       name: user
       password: pass
       roles: USER
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sohrabmastersolutions@gmail.com
+    password: jkrbsisscnncrwmg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable:true
 
 razorpay:
   key-id: rzp_test_SYcy5fobkxRpqE

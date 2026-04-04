@@ -6,11 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record NewUser(
-		@Pattern(regexp = "^[7896][0-9]{9}$", message = "Enter valid phone number.")
-		@NotBlank(message = "Please provide phone number.")
-		@Size(min = 10, max = 10)
-		String phoneNumber,
-
 		@Pattern(regexp = "^[a-zA-Z]+$", message = "Digits and special characters are not allowed.")
 		@NotBlank
 		String firstName,

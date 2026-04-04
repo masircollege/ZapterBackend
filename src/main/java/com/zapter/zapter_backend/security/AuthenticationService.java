@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.security;
 
+import com.zapter.zapter_backend.security.dto.UserInputPhone;
 import com.zapter.zapter_backend.user.domain.User;
 import com.zapter.zapter_backend.user.dto.admin.AdminLogin;
 import com.zapter.zapter_backend.user.dto.user.NewUser;
@@ -15,6 +16,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.twilio.Twilio;
+import com.twilio.exception.ApiException;
+import com.twilio.rest.verify.v2.service.Verification;
+import com.twilio.rest.verify.v2.service.VerificationCheck;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
@@ -27,6 +35,20 @@ public class AuthenticationService {
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
 	private final EmployeeMapper employeeMapper;
+
+	@Value("${twilio.account-sid}")
+	private String accountSid;
+
+	@Value("${twilio.auth-token}")
+	private String authToken;
+
+	@Value("${twilio.verify-service-sid}")
+	private String verifyServiceSid;
+
+	@PostConstruct
+	public void init() {
+		Twilio.init(accountSid, authToken);
+	}
 
 	public AuthenticationService(
 			UserRepository userRepository,
@@ -48,12 +70,14 @@ public class AuthenticationService {
 		this.adminRepository = adminRepository;
 	}
 
-	public boolean signup(NewUser newUserDto) {
+	public boolean signup(UserInputPhone inputPhone) {
         try {
-            if (newUserDto != null){
+            if (inputPhone != null){
+				if (userRepository.findByPhoneNumber(inputPhone.phoneNumber()).isPresent()) {
+					return false;
+				}
 
-                User newUser = userMapper.toUser(newUserDto, passwordEncoder);
-                userRepository.save(newUser);
+				sendOtp(inputPhone.phoneNumber());
                 return true;
             }
 			return false;
@@ -61,7 +85,34 @@ public class AuthenticationService {
             return false;
         }
 	}
-	
+
+	public void sendOtp(String toPhone) {
+		try {
+			Verification.creator(verifyServiceSid, toPhone, "sms").create();
+		} catch (ApiException e) {
+			throw new RuntimeException("Failed to send OTP to " + maskPhone(toPhone) + ": " + e.getMessage());
+		}
+	}
+
+	public boolean verifyOtp(String toPhone, String otp) {
+		try {
+			VerificationCheck check = VerificationCheck.creator(verifyServiceSid)
+					.setTo(toPhone)
+					.setCode(otp)
+					.create();
+			return "approved".equals(check.getStatus());
+		} catch (ApiException e) {
+			// Twilio throws 404 if OTP not found / already used
+			return false;
+		}
+	}
+
+	private String maskPhone(String phone) {
+		if (phone == null || phone.length() <= 4) return "****";
+		return phone.substring(0, phone.length() - 4).replaceAll("\\d", "*")
+				+ phone.substring(phone.length() - 4);
+	}
+
 	public String login(Accounts account) {
 		try {
 			if (account instanceof UserLogin user){

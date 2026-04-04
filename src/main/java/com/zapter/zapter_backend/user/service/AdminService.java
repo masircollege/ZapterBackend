@@ -2,9 +2,12 @@ package com.zapter.zapter_backend.user.service;
 
 import com.zapter.zapter_backend.security.AdminPasswordGenerator;
 import com.zapter.zapter_backend.user.domain.Admin;
+import com.zapter.zapter_backend.user.domain.Employee;
 import com.zapter.zapter_backend.user.enums.Role;
 import com.zapter.zapter_backend.user.repository.AdminRepository;
 import com.zapter.zapter_backend.user.repository.EmployeeRepository;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -21,19 +24,22 @@ public class AdminService {
     private final TransactionTemplate transactionTemplate;
     private final AdminPasswordGenerator adminPasswordGenerator;
     private final PasswordEncoder passwordEncoder;
+    private final JavaMailSender javaMailSender;
 
     public AdminService(
             EmployeeRepository employeeRepository,
             TransactionTemplate transactionTemplate,
             AdminRepository adminRepository,
             AdminPasswordGenerator adminPasswordGenerator,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            JavaMailSender javaMailSender
             ){
         this.employeeRepository = employeeRepository;
         this.transactionTemplate = transactionTemplate;
         this.adminRepository = adminRepository;
         this.adminPasswordGenerator = adminPasswordGenerator;
         this.passwordEncoder = passwordEncoder;
+        this.javaMailSender = javaMailSender;
     }
 
     public void createAdmin(Long employeeId, Role role){
@@ -45,6 +51,7 @@ public class AdminService {
                 admin.setPassword(passwordEncoder.encode(adminPasswordGenerator.generatePassword()));
                 admin.setRole(role);
                 adminRepository.save(admin);
+                sendMail(admin,employeeId);
                 return null;
             } catch (Exception e) {
                 status.setRollbackOnly();
@@ -86,16 +93,20 @@ public class AdminService {
 
     }
 
-    public void setPassword(String id, String password){
-        updatePassword(id,password);
+    public void setPassword(String id, String oldPassword, String password, String confirmPassword) {
+        updatePassword(id, oldPassword, password, confirmPassword);
     }
 
-    public void updatePassword(String adminId, String password){
+    public void updatePassword(String adminId, String oldPassword, String password, String confirmPassword) {
         try {
             Optional<Admin> adminById = adminRepository.findById(adminId);
             Admin admin = adminById.orElseThrow(RuntimeException::new);
-            admin.setPassword(passwordEncoder.encode(password));
-            adminRepository.save(admin);
+            if (oldPassword.equals(admin.getPassword())) {
+                if (password.equals(confirmPassword)) {
+                    admin.setPassword(passwordEncoder.encode(password));
+                    adminRepository.save(admin);
+                }
+            }
 
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
@@ -103,6 +114,14 @@ public class AdminService {
     }
 
     private String sendMail(Admin admin, Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).get();
+        String email = employee.getEmail();
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(email);
+        mailMessage.setSubject("Successfully Registered! "+employee.getFirstName()+" "+employee.getLastName());
+        mailMessage.setText("Here is your login credentials for the admin dashboard, " +
+                "admin-id : "+admin.getAdminId()+" "+"password : "+admin.getPassword()+"(NOTE : This password is meant to be changed later)");
+        javaMailSender.send(mailMessage);
         return "";
     }
 }

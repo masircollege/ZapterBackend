@@ -1,5 +1,6 @@
 package com.zapter.zapter_backend.user.controller;
 
+import com.zapter.zapter_backend.user.dto.user.UserResponse;
 import com.zapter.zapter_backend.user.service.UserService;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,15 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long userId) {
+        try {
+            return new ResponseEntity<>(userService.getUserById(userId),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
